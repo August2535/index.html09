@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Calculator</title>
+    <link rel="stylesheet" href="tax.css">
+    <script defer src="tax.js"></script>
+</head>
+<body>
+    <h1>Tax Calculator</h1>
+    <label>Sales Amount:</label>
+    <input type="text" id="sale">
+    <label>Tax Percent:</label>
+    <input type="text" id="tax">
+    <button onclick="processEntries()">Calculate</button>
+    <h2>Total:</h2>
+    <p id="total"></p>
+</body>
+</html>
+
+/* tax.css */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+}
+button {
+    margin: 10px;
+    padding: 10px;
+}
+
+/* tax.js */
+function processEntries() {
+    let sale = parseFloat(document.getElementById("sale").value);
+    let tax = parseFloat(document.getElementById("tax").value);
+    
+    if (isNaN(sale) || sale <= 0) {
+        alert("Enter a valid sales amount.");
+        return;
+    }
+    if (isNaN(tax) || tax <= 0 || tax >= 100) {
+        alert("Enter a valid tax percentage (1-99).");
+        return;
+    }
+    
+    let total = sale + (sale * tax / 100);
+    document.getElementById("total").textContent = `$${total.toFixed(2)}`;
+}
